@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Assignment 8.2</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+
+	 $(document).ready(function () {
+        window.name = "parent";
+        $('#login').click(function (event){ 
+            event.preventDefault();
+            window.open("login.html","_self");
+        });
+        window.name = "parent";
+        $('#signup').click(function (event){ 
+            event.preventDefault();
+            window.open("signup.html","_self");
+        });
+    });
+
+
+    /*
+      function signup() {
+        window.open('signup.html', '_self');
+      }
+
+      function login(){
+        window.open('login.html', '_self');
+      }*/
+</script>
+</head>
+<body>
+    <h2 style="text-align: center;">MySelfieTech</h2>
+    <button style="margin-left: 46%" id="signup">Signup</button>
+    <button id="login">Login</button>
+
+</body>
+</html>

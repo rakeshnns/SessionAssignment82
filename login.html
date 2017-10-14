@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+      <style type="text/css">
+      input{
+        margin-left: 46%;
+      }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      //Variable declaration
+      var lemail;
+      var lusrnam
+      var lpass;
+      var lerrtxt;
+      var checkflag;
+      var countx;
+      var countxInt;
+      var emailIndex;
+      var passwordIndex;
+      var userIndex;
+      //jquery starting..
+      $(document).ready(function (){
+
+         //Jquery function for back.
+         $("#lback").click(function (){
+              event.preventDefault();
+              window.open('index.html', '_self');
+              
+         });
+         
+         //Jquery for Submit..
+         $("#lsubmitq").click(function(){
+             $("#lemailid,#lpassword").css({"background-color":"white"});
+             $("#lerrormsg").css({"color":"red"});
+             $("#lerrormsg").html("");
+             lemail  = $("#lemailid").val();
+             lpass   = $("#lpassword").val();
+             lerrtxt = '';
+             
+             //Email validity check
+             if(lemail== ''){
+               $("#lemailid").css({"background-color":"pink"});
+               lerrtxt = lerrtxt + 'Invaliv EmailID.'
+               $("#lerrormsg").html(lerrtxt);
+            }
+             //Password check 
+             if(lpass == ''){
+               $("#lpassword").css({"background-color":"pink"});
+               lerrtxt = lerrtxt + 'Invaliv Password.'
+               $("#lerrormsg").html(lerrtxt);
+            }
+             //email and Password check
+            if(lemail == '' && lpass == ''){
+               $("#lemailid,#lpassword").css({"background-color":"pink"});
+               $("#lerrormsg").html("Please Enter valid entries for the fields.");
+            }
+            //email and pass combination check
+            if(lemail != '' && lpass != ''){
+             $("#lemailid,#lpassword").css({"background-color":"white"});
+             $("#lerrormsg").html("");
+             
+             countx = localStorage.getItem("count");
+                  if(countx == null){
+                    countx = 0;
+                    $("#lerrormsg").html("Please Sign in.");   //No useridrecorded in Localstorage
+                  }else{
+                        countxInt = parseInt(countx);
+                        checkflag ='n';
+                        for (var i = 1; i <= countxInt; i++) {
+                          
+                          emailIndex    = "emailid" +i;
+                          passwordIndex = "password" + i;
+
+                          //If email and Pass match - rooting to Home Page
+                          if (lpass == localStorage.getItem(passwordIndex) && lemail ==localStorage.getItem(emailIndex)){
+                              userIndex = "username" + i; 
+                              lusrnam = localStorage.getItem(userIndex);
+                              localStorage.setItem("Loginusernm",lusrnam);
+                              checkflag = 'y';
+                              event.preventDefault();
+                              window.open('home.html', '_self');  
+                              break;                           
+                          }
+                          
+                        }
+                        if (checkflag != 'y'){
+
+                        $("#lerrormsg").html("EmailID or Password is wrong.");   
+                        }                       
+
+                  }      
+
+           }
+         });
+
+      });
+    </script>
+</head>
+<body>
+    <h2 style="text-align: center;">MySelfieTech</h2>
+    <h3 style="text-align: center;margin-top: 9%">Login Page</h3>
+ 
+    <input type="text" name="emailid" id="lemailid" placeholder="emailid"><br>
+    <input type="password" name="password" id="lpassword" placeholder="password"><br>
+
+    <button id="lsubmitq"  style="margin-left: 46%">Submit Query</button>
+    <br>
+    <br>
+    <span id="lerrormsg" style="margin-left: 46%"></span> 
+    <button id="lback" style="margin-left: 5%">back</button>
+
+
+</body>
+</html>

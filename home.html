@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Home</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    	//Jquery starting
+    	$(document).ready(function (){
+    	var huser = localStorage.getItem("Loginusernm");   //Getting Login User name
+    	$("#display").html("<b>You are Welcome " + huser + "</b>")
+           //Logout handling 
+           $("#logout").click(function (){
+              event.preventDefault();
+              window.open('index.html', '_self');
+           }); 
+
+        });
+    </script>	
+</head>
+<body>
+	    <h2 style="text-align: center;">MySelfieTech</h2>
+	    <p id="display" style="text-align: center;"></p>
+	    <button id="logout"  style="margin-left: 50%">Logout</button>
+
+</body>
+</html>
